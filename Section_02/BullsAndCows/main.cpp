@@ -38,6 +38,12 @@ void PrintIntro()
 {
   const int32 HIDDEN_WORD_LENGTH = BCGame.HiddenWordLength();
   std::cout << "Welcome To Bulls And Cows: A fun word game!\n";
+  std::cout << "           }^_^{      ^_^" << std::endl;
+  std::cout << "           (o o)     (o o)" << std::endl;
+  std::cout << "   /--------\\ /       \\ /--------\\" << std::endl;
+  std::cout << "  / | BULLS |o         o | COWS | \\" << std::endl;
+  std::cout << " *  ||-----||            ||--;;||  *" << std::endl;
+  std::cout << "    ^^     ^^            ^^    ^^" << std::endl;
   std::cout << "Can you guess the " << HIDDEN_WORD_LENGTH << "-letter Isogram I'm thinking of?\n";
   std::cout << std::endl;
 }
@@ -46,13 +52,10 @@ void PlayGame()
 {
   int32 MaxTries = BCGame.GetMaxTries();
 
-  //for (int32 count = 0; count < MaxTries; count++)
   while(!BCGame.IsGameWon() && BCGame.GetCurrentTry() <= MaxTries)
   {
     std::cout << "You have " << MaxTries-BCGame.GetCurrentTry()+1 << " tries remaining\n";
-    FText Guess = GetValidGuess(); // Get Player guess (keep asking until valid guess given)
-    
-    // Submit Valid guess and display Bulls and Cows
+    FText Guess = GetValidGuess();
     FBullCowCount result = BCGame.GetBullCowCount(Guess);
     std::cout << Guess << " contains Bulls: " << result.Bulls << "  Cows: " << result.Cows << std::endl << std::endl;
   }
@@ -67,7 +70,6 @@ FText GetValidGuess()
     std::cout << "Enter your guess: ";
     std::getline(std::cin, Guess);
 
-    // Check validity of guess and prompt again if not valid
     Status = BCGame.CheckGuessValidity(Guess);
     switch (Status)
     {
@@ -83,7 +85,7 @@ FText GetValidGuess()
     default:
       break;
     }
-  } while (Status != EGuessStatus::OK); // Loop until valid guess is made
+  } while (Status != EGuessStatus::OK); // Keep prompting until valid guess is made
   return Guess;
 }
 

@@ -7,8 +7,16 @@ using FString = std::string;
 // using int32 = int;
 
 FBullCowGame::FBullCowGame() { Reset(); }
-int32 FBullCowGame::GetMaxTries() const { return MyMaxTries; }
 int32 FBullCowGame::GetCurrentTry() const { return MyCurrentTry; }
+
+int32 FBullCowGame::GetMaxTries() const
+{
+  /*  ALTERNATIVE
+    TMap<int32, int32> MaxTries = { {3,4}, {4,7}, {5,10}, {6,15}, {7,18}, {8,20} };
+    return MaxTries[HiddenWordLength()];
+  */
+  return (int32)((HiddenWordLength() * HiddenWordLength()) / 2);
+}
 
 FString FBullCowGame::GetHiddenWord() const
 {
@@ -27,11 +35,8 @@ bool FBullCowGame::IsGameWon() const
 
 void FBullCowGame::Reset()
 {
-  const FString MY_HIDDEN_WORD = "planet";  // TODO Choose new word randomly from list
+  const FString MY_HIDDEN_WORD = "plane";  // TODO Choose new word randomly from list
   MyHiddenWord = MY_HIDDEN_WORD;
-
-  constexpr int32 MAX_TRIES = 8;  // TODO Set number of tries relative to word length
-  MyMaxTries = MAX_TRIES;
 
   MyCurrentTry = 1;
 
@@ -47,19 +52,18 @@ EGuessStatus FBullCowGame::CheckGuessValidity(FString Guess) const
   return EGuessStatus::OK;
 }
 
-// counts bulls and cows in submitted word, and inceases try# assuming it's a valid guess
 FBullCowCount FBullCowGame::GetBullCowCount(FString Guess)
 {
   MyCurrentTry++;
   FBullCowCount result;
-  for (int GuessChar = 0; GuessChar < Guess.length(); GuessChar++)
+  for (int32 GuessChar = 0; GuessChar < (int32)Guess.length(); GuessChar++)
   {
     if (Guess[GuessChar] == MyHiddenWord[GuessChar])
     {
       result.Bulls++;
       continue;
     }
-    for (int HiddenWordChar = 0; HiddenWordChar < MyHiddenWord.length(); HiddenWordChar++)
+    for (int32 HiddenWordChar = 0; HiddenWordChar < (int32)MyHiddenWord.length(); HiddenWordChar++)
     {
       if (MyHiddenWord[HiddenWordChar] == Guess[GuessChar])
       {
