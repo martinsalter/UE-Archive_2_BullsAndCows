@@ -1,2 +1,4 @@
-﻿  main.cpp
+﻿  FBullCowGame.cpp
+D:\Repos\Unreal Developer Archive\Section 2 - Bulls And Cows\Section_02\BullsAndCows\FBullCowGame.cpp(55,37): warning C4018: '<': signed/unsigned mismatch
+D:\Repos\Unreal Developer Archive\Section 2 - Bulls And Cows\Section_02\BullsAndCows\FBullCowGame.cpp(62,49): warning C4018: '<': signed/unsigned mismatch
   BullsAndCows.vcxproj -> D:\Repos\Unreal Developer Archive\Section 2 - Bulls And Cows\Section_02\Debug\BullsAndCows.exe

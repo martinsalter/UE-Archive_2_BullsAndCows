@@ -12,8 +12,10 @@ struct FBullCowCount
 
 enum class EGuessStatus
 {
+  Invalid_Status,
   OK,
   IncorrectLength,
+  NotLowerCase,
   NotIsogram
 };
 
@@ -31,10 +33,13 @@ public:
   void Reset();
   EGuessStatus CheckGuessValidity(FString) const;
 
-  FBullCowCount SubmitGuess(FString);
+  FBullCowCount GetBullCowCount(FString);
 
 private:
   int32 MyCurrentTry;
   int32 MyMaxTries;
   FString MyHiddenWord;
+  bool bGameWon;
+  bool IsIsogram(FString) const;
+  bool IsLowercase(FString) const;
 };
